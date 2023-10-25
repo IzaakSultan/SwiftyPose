@@ -31,5 +31,4 @@ func processDetections(for request: VNRequest, error: Error?) {
         let results = pose.parse(observation: observation)
     }
 }
-
 ```

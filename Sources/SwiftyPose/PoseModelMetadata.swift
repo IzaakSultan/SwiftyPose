@@ -3,18 +3,18 @@ import CoreML
 import Yams
 
 public struct InputMetadata {
-    var size: CGSize
+    public private(set) var size: CGSize
 }
 
 public struct OutputMetadata {
-    var classes: Dictionary<Int, String>
-    var keypoints: Int
-    var dimensions: Int
+    public private(set) var classes: Dictionary<Int, String>
+    public private(set) var keypoints: Int
+    public private(set) var dimensions: Int
 }
 
 public struct PoseModelMetadata {
-    var input: InputMetadata
-    var output: OutputMetadata
+    public private(set) var input: InputMetadata
+    public private(set) var output: OutputMetadata
     
     init(for model: MLModel) {
         let description = model.modelDescription

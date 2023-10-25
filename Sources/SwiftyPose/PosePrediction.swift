@@ -1,8 +1,8 @@
 import Foundation
 
 public struct PosePrediction {
-    var `class`: String
-    var confidence: Float
-    var box: CGRect
-    var points: Array<(x: Float, y: Float)>
+    public private(set) var `class`: String
+    public private(set) var confidence: Float
+    public private(set) var box: CGRect
+    public private(set) var points: Array<(x: Float, y: Float)>
 }
