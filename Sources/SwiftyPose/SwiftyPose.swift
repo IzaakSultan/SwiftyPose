@@ -28,7 +28,7 @@ public class SwiftyPose {
         let classesNum = dimensions - 4 - metadata.output.keypoints * metadata.output.dimensions
         let inputWidth = Float(metadata.input.size.width)
 
-        return nonMaxSupression((0..<predictions).compactMap { index in
+        let posePredictions = (0..<predictions).compactMap { index in
             let prediction = shapedArray[0...0, 0..<shapedArray.shape[1], index...index].scalars
             let confidences = Array(prediction[4..<(4+classesNum)])
             
@@ -39,7 +39,9 @@ public class SwiftyPose {
                 let x = prediction[0] - width / 2
                 let y = prediction[1] - height / 2
 
-                let points = Array(prediction[4+classesNum..<dimensions]).chunked(into: metadata.output.dimensions).map { (x: $0[0], y: $0[1]) }
+                let points = Array(prediction[4+classesNum..<dimensions])
+                        .chunked(into: metadata.output.dimensions)
+                        .map { (x: $0[0] / inputWidth, y: $0[1] / inputWidth) }
                 let confidence = confidences.enumerated().max(by: { $0.element < $1.element })!
                 
                 return PosePrediction(
@@ -56,7 +58,9 @@ public class SwiftyPose {
             }
             
             return nil
-        })
+        }
+        
+        return nonMaxSupression(posePredictions)
     }
     
     private func nonMaxSupression(_ predictions: Array<PosePrediction>, threshold: Double = 0.5) -> Array<PosePrediction> {
