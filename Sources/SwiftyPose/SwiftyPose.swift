@@ -11,8 +11,8 @@ extension Array {
 }
 
 public class SwiftyPose {
-    private(set) var model: MLModel
-    private(set) var metadata: PoseModelMetadata
+    public private(set) var model: MLModel
+    public private(set) var metadata: PoseModelMetadata
 
     public init(model: MLModel) {
         self.model = model
