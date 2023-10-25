@@ -14,7 +14,7 @@ public class SwiftyPose {
     private(set) var model: MLModel
     private(set) var metadata: PoseModelMetadata
 
-    init(model: MLModel) {
+    public init(model: MLModel) {
         self.model = model
         self.metadata = PoseModelMetadata(for: model)
     }
