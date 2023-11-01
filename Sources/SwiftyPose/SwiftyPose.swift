@@ -51,7 +51,7 @@ public class SwiftyPose {
                         x: Double(x / inputWidth),
                         y: Double(y / inputWidth),
                         width: Double(width / inputWidth),
-                        height: 1.0 - Double(y / inputWidth)
+                        height: Double(height / inputWidth)
                     ),
                     points: points
                 )
